@@ -650,7 +650,7 @@ const TIMELINE: string[] = [
   '01:00 HK polls open',
   '~05:30 Verstappen wins Vegas',
   '06:00 161 of 186 drones downed',
-  'AM COP31 text rejected',
+  'MORNING COP31 text rejected',
   '10:00 HK turnout 98,79%',
   'MIDDAY Cikande: 3 dead, 36 missing',
 ];
@@ -700,13 +700,13 @@ function draw(): number {
   const sw = Math.floor(CW / 6);
   for (let i = 0; i < 6; i++) {
     const x = M + i * sw;
-    if (i > 0) vline(x, y, 52, MUTED);
+    if (i > 0) vline(x, y, 48, MUTED);
     drawTextC(x + sw / 2, y + 3, STATS[i][0], 3, RED, true);
     const lab = wrap(STATS[i][1], 1, sw - 12);
     let ly = y + 28;
     for (const ln of lab) { drawTextC(x + sw / 2, ly, ln, 1, INK); ly += 9; }
   }
-  y += 52;
+  y += 48;
   hline(M, y, CW, INK); y += 4;
 
   // ---- region strip
@@ -722,11 +722,11 @@ function draw(): number {
   // ---- timeline rail
   const tl1 = TIMELINE.slice(0, 3).join('   ·   ');
   const tl2 = TIMELINE.slice(3).join('   ·   ');
-  rect(M, y, CW, 36, INK);
+  rect(M, y, CW, 30, INK);
   drawText(M + 8, y + 4, 'THE DAY IN UTC', 1, GOLD, true);
   drawText(M + 8 + textW('THE DAY IN UTC', 1) + 14, y + 4, tl1, 1, WHITE);
-  drawText(M + 8, y + 19, tl2, 1, WHITE);
-  y += 36 + 6;
+  drawText(M + 8, y + 18, tl2, 1, WHITE);
+  y += 30 + 6;
 
   // ---- heroes
   const hy = y;
@@ -739,13 +739,13 @@ function draw(): number {
     label(x, hy + 106, `${hh.n} · ${hh.place}`, 1, INK);
     let ty = hy + 118;
     const hl = wrap(hh.head, 2, COLW - 6);
-    for (const ln of hl) { drawText(x, ty, ln, 2, INK, true); ty += 15; }
+    for (const ln of hl) { drawText(x, ty, ln, 2, INK, true); ty += 19; }
     ty += 2;
     const bl = wrap(hh.body, 1, COLW - 6);
     for (const ln of bl) { drawText(x, ty, ln, 1, [40, 40, 40]); ty += 9; }
     drawText(x, ty + 2, `(${hh.src})`, 1, MUTED);
   }
-  y = hy + 198;
+  y = hy + 206;
 
   // ---- medium 3x3
   const my = y;
@@ -754,19 +754,19 @@ function draw(): number {
       const idx = r * 3 + c;
       const md = MEDIUM[idx];
       const x = M + c * (COLW + GAP);
-      const yy = my + r * 88;
+      const yy = my + r * 94;
       md.art(x, yy, COLW, 32);
       frame(x, yy, COLW, 32, INK, 1);
       tagChip(x + COLW - textW(md.tag, 1) - 16, yy + 5, md.tag, true);
       label(x, yy + 36, `${md.n} · ${md.place}`, 1, INK);
       let ty = yy + 47;
       const hl = wrap(md.head, 2, COLW - 6);
-      for (const ln of hl.slice(0, 2)) { drawText(x, ty, ln, 2, INK, true); ty += 15; }
+      for (const ln of hl.slice(0, 2)) { drawText(x, ty, ln, 2, INK, true); ty += 19; }
       const bl = wrap(md.body, 1, COLW - 6);
       for (const ln of bl.slice(0, 1)) { drawText(x, ty, ln, 1, [40, 40, 40]); ty += 9; }
     }
   }
-  y = my + 3 * 88 + 4;
+  y = my + 3 * 94 + 4;
 
   // ---- also-on
   hline(M, y, CW, INK); y += 4;
@@ -779,7 +779,7 @@ function draw(): number {
     for (let i = 0; i < half; i++) {
       const it = ALSO[col * half + i];
       if (!it) continue;
-      const yy = y + i * 13;
+      const yy = y + i * 12;
       drawText(x, yy, String(it.n), 1, RED, true);
       const rx = x + 16;
       drawText(rx, yy, it.region, 1, INK, true);
@@ -791,7 +791,7 @@ function draw(): number {
       }
     }
   }
-  y += half * 13 + 6;
+  y += half * 12 + 6;
 
   // ---- map + DATE CHECK
   const by = y;
@@ -814,7 +814,7 @@ function draw(): number {
     for (let i = 0; i < dcHalf; i++) {
       const it = DATECHECK[col * dcHalf + i];
       if (!it) continue;
-      const yy = iy + i * 10;
+      const yy = iy + i * 9;
       drawText(cx0, yy, 'x', 1, RED, true);
       drawText(cx0 + 9, yy, it, 1, [40, 40, 40]);
     }
